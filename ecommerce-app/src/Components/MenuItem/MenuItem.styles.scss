@@ -18,7 +18,7 @@
     }
 
     & .content{
-      opacity: 0.9
+      opacity: 0.8
     }
   }
 
@@ -49,7 +49,9 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #737171;
-    background-color: white;
+    background: #ADA996;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     opacity: 0.7;
     position: absolute;
 
@@ -57,7 +59,7 @@
       font-weight: bold;
       margin-bottom: 6px;
       font-size: 22px;
-      color: #4a4a4a;
+      color: #444444;
     }
 
     .subtitle {

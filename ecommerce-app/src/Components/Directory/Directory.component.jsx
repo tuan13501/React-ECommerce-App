@@ -12,16 +12,16 @@ class Directory extends React.Component {
     }
   }
   componentDidMount(){
-    console.log(this.state.sections)
     this.setState({
       sections: sections
     })
   }
   render() {
+    console.log('sections', this.state.sections)
     return (
       <div className="menu-container">
-        {this.state.sections.map(({title, imageUrl, id, size}) => {
-          return <MenuItem imgUrl={imageUrl} title={title} key={id} size={size}/>
+        {this.state.sections.map(({title, imageUrl, id, size, linkUrl}) => {
+          return <MenuItem imgUrl={imageUrl} title={title} key={id} size={size} linkUrl={linkUrl}/>
         })}
       </div>
     )
