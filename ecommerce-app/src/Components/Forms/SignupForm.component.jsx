@@ -1,5 +1,7 @@
 import React from 'react'
 import './SignupForm.styles.scss'
+import FormInput from '../FormInput/FormInput.component'
+import CustomButton from '../CustomButton/CustomButton.component'
 
 
 class SignupForm extends React.Component{
@@ -7,18 +9,74 @@ class SignupForm extends React.Component{
     super()
 
     this.state = {
+      values: {},
       firstName: '',
       lastName: '',
       email: '',
-      username: '',
       password: ''
     }
   }
 
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      values: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      }
+    })
+  }
+
   render(){
     return (
-      <div>
-        World   
+      <div className="sign-up">
+        <h2>I need to create an account.</h2>
+        <span>Enter your information to create a new account.</span>
+        <form className="group">
+          <FormInput 
+            name="firstName"
+            value={this.state.firstName}
+            handleChange={this.handleChange}
+            label="First Name"
+            className="form-input"
+            type="text"
+            required
+          />
+          <FormInput 
+            name="lastName"
+            value={this.state.lastName}
+            handleChange={this.handleChange}
+            label="Last Name"
+            type="text"
+            required
+          />
+          <FormInput 
+            name="email"
+            value={this.state.email}
+            handleChange={this.handleChange}
+            label="Email"
+            type="email"
+            required
+          />
+          <FormInput 
+            name="password"
+            value={this.state.password}
+            handleChange={this.handleChange}
+            label="Password"
+            type="password"
+            required
+          />
+          <CustomButton >Sign Up</CustomButton>
+        </form>
       </div>
     )
   }

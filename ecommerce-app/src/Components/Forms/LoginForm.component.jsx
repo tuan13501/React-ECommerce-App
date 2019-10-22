@@ -1,6 +1,8 @@
 import React from 'react'
 import './LoginForm.styles.scss'
 import FormInput from '../FormInput/FormInput.component'
+import CustomButton from '../CustomButton/CustomButton.component'
+import { signInWithGoogle } from '../../firebase/firebase.utils'
 
 class LoginForm extends React.Component{
   constructor(props){
@@ -41,23 +43,24 @@ class LoginForm extends React.Component{
         <form className="group" onSubmit={this.handleSubmit}>
           <FormInput 
             handleChange={this.handleChange} 
-            label="email" 
+            label="Email" 
             name="email" 
             value={this.state.email} 
             className="form-input" 
-            type="text" 
+            type="email" 
             required 
           />
           <FormInput 
             handleChange={this.handleChange} 
-            label="password" 
+            label="Password" 
             name="password" 
             value={this.state.password} 
             className="form-input" 
             type="password" 
             required
           />
-          <button type="submit">Log In</button>
+          <CustomButton >Log In</CustomButton>
+          <CustomButton onClick={signInWithGoogle}>Log In</CustomButton>
         </form>
       </div>
     )
