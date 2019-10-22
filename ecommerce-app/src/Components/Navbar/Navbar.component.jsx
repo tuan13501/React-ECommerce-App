@@ -1,6 +1,6 @@
+import { ReactComponent as Logo  } from '../../assets/crown.svg'
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { ReactComponent as Logo  } from '../../assets/crown.svg'
 import './Navbar.styles.scss'
  
 export default class Navbar extends Component {
@@ -16,6 +16,9 @@ export default class Navbar extends Component {
           </Link>
           <Link className="option" to ="/contact">
             <h3>CONTACT</h3>
+          </Link>
+          <Link className="option" to ="/signin">
+            <h3>SIGN IN</h3>
           </Link>
         </div>
       </div>
