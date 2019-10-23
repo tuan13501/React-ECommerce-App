@@ -1,3 +1,12 @@
 .sign-up{
-  width: 45%
+  width: 36%;
+  display: flex;
+  flex-direction: column;
+
+  .buttons{
+    display: flex;
+    // width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
 }

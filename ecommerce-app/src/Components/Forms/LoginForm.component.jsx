@@ -9,6 +9,7 @@ class LoginForm extends React.Component{
     super(props)
 
     this.state = {
+      passwordIsVisible: false,
       values: {},
       email: '',
       password: ''
@@ -34,13 +35,19 @@ class LoginForm extends React.Component{
     })
   }
 
+  toggleVisible = () => {
+    this.setState({
+      passwordIsVisible: !this.state.passwordIsVisible
+    })
+  }
+
   render(){
-    console.log(this.state)
+    console.log('sign in state', this.state)
     return(
       <div className="sign-in">
         <h2>I already have an account.</h2>
         <span>Sign in with your remail and password.</span>
-        <form className="group" onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <FormInput 
             handleChange={this.handleChange} 
             label="Email" 
@@ -56,11 +63,17 @@ class LoginForm extends React.Component{
             name="password" 
             value={this.state.password} 
             className="form-input" 
-            type="password" 
+            type={this.state.passwordIsVisible ? 'text' : 'password'} 
             required
           />
-          <CustomButton >Log In</CustomButton>
-          <CustomButton onClick={signInWithGoogle}>Log In</CustomButton>
+          <label>
+            Toggle Visibility
+          <input type="checkbox" onClick={this.toggleVisible}></input>
+          </label>
+          <div className="buttons">
+            <CustomButton >Log In</CustomButton>
+            <CustomButton isGoogleSignIn={true} onClick={signInWithGoogle}>Sign in with google</CustomButton>
+          </div>
         </form>
       </div>
     )

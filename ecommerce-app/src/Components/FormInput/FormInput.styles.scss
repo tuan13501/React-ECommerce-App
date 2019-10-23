@@ -10,6 +10,8 @@ $main-color: black;
 .group {
   position: relative;
   margin: 45px 0;
+  display: flex;
+  flex-direction: column;
 
   .form-input {
     background: none;
@@ -22,7 +24,8 @@ $main-color: black;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $sub-color;
-    margin: 25px 0;
+    margin: 10px 0;
+    overflow: hidden;
 
     &:focus {
       outline: none;

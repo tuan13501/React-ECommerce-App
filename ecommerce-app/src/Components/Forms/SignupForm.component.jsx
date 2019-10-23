@@ -9,6 +9,7 @@ class SignupForm extends React.Component{
     super()
 
     this.state = {
+      passwordIsVisible: false,
       values: {},
       firstName: '',
       lastName: '',
@@ -36,12 +37,20 @@ class SignupForm extends React.Component{
     })
   }
 
+  toggleVisible = () => {
+    this.setState({
+      passwordIsVisible: !this.state.passwordIsVisible
+    })
+  }
+
   render(){
+    console.log('sign in state', this.state)
+
     return (
       <div className="sign-up">
         <h2>I need to create an account.</h2>
         <span>Enter your information to create a new account.</span>
-        <form className="group">
+        <form>
           <FormInput 
             name="firstName"
             value={this.state.firstName}
@@ -72,10 +81,16 @@ class SignupForm extends React.Component{
             value={this.state.password}
             handleChange={this.handleChange}
             label="Password"
-            type="password"
+            type={this.state.passwordIsVisible ? 'text' : 'password'} 
             required
           />
-          <CustomButton >Sign Up</CustomButton>
+          <label>
+            Toggle Visibility
+          <input type="checkbox" onClick={this.toggleVisible}></input>
+          </label>
+          <div className="buttons">
+            <CustomButton >Sign Up</CustomButton>
+          </div>
         </form>
       </div>
     )
