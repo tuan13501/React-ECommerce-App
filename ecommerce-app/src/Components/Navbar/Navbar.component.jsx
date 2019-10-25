@@ -1,12 +1,12 @@
 import { ReactComponent as Logo  } from '../../assets/crown.svg'
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import './Navbar.styles.scss'
 import { auth } from '../../firebase/firebase.utils'
 
 
 const Navbar = ({currentUser, history}) =>{
-  console.log(history)
+  // console.log(history)
   return (
     <div className="header">
       <Link className="logo-container" to="/">

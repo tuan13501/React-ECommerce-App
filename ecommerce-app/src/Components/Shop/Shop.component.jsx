@@ -12,7 +12,7 @@ class Shop extends Component {
   }
 
   render() {
-    console.log('shop data on render', this.state.shopData)
+    // console.log('shop data on render', this.state.shopData)
     return (
       <div className="shop-page">
         {this.state.shopData.map(({id, ...otherCollectionProps}) => {

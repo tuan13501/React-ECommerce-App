@@ -17,7 +17,7 @@ class Directory extends React.Component {
     })
   }
   render() {
-    console.log('sections', this.state.sections)
+    // console.log('sections', this.state.sections)
     return (
       <div className="menu-container">
         {this.state.sections.map(({title, imageUrl, id, size, linkUrl}) => {

@@ -62,7 +62,7 @@ class SignupForm extends React.Component{
   }
 
   render(){
-    console.log('sign in state', this.state)
+    // console.log('sign in state', this.state)
 
     return (
       <div className="sign-up">
