@@ -2,6 +2,7 @@ import React from 'react'
 import './SignupForm.styles.scss'
 import FormInput from '../FormInput/FormInput.component'
 import CustomButton from '../CustomButton/CustomButton.component'
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 
 
 class SignupForm extends React.Component{
@@ -11,10 +12,10 @@ class SignupForm extends React.Component{
     this.state = {
       passwordIsVisible: false,
       values: {},
-      firstName: '',
-      lastName: '',
+      displayName: '',
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   }
 
@@ -25,21 +26,38 @@ class SignupForm extends React.Component{
     })
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.setState({
-      values: {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        password: this.state.password
-      }
-    })
+    const { displayName, email, password, confirmPassword } = this.state;
+    
+    if(password !== confirmPassword){
+        alert('passwords do not match')
+        return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password)
+
+      await createUserProfileDocument(user, {displayName})
+
+      this.setState({
+        passwordIsVisible: false,
+        values: {},
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      })
+      
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   toggleVisible = () => {
+    const { passwordIsVisible} = this.state;
     this.setState({
-      passwordIsVisible: !this.state.passwordIsVisible
+      passwordIsVisible: !passwordIsVisible
     })
   }
 
@@ -50,21 +68,13 @@ class SignupForm extends React.Component{
       <div className="sign-up">
         <h2>I need to create an account.</h2>
         <span>Enter your information to create a new account.</span>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <FormInput 
-            name="firstName"
-            value={this.state.firstName}
+            name="displayName"
+            value={this.state.displayName}
             handleChange={this.handleChange}
-            label="First Name"
+            label="Display Name"
             className="form-input"
-            type="text"
-            required
-          />
-          <FormInput 
-            name="lastName"
-            value={this.state.lastName}
-            handleChange={this.handleChange}
-            label="Last Name"
             type="text"
             required
           />
@@ -73,7 +83,7 @@ class SignupForm extends React.Component{
             value={this.state.email}
             handleChange={this.handleChange}
             label="Email"
-            type="email"
+            type="text"
             required
           />
           <FormInput 
@@ -82,6 +92,16 @@ class SignupForm extends React.Component{
             handleChange={this.handleChange}
             label="Password"
             type={this.state.passwordIsVisible ? 'text' : 'password'} 
+            isPassword
+            required
+          />
+          <FormInput 
+            name="confirmPassword"
+            value={this.state.confirmPassword}
+            handleChange={this.handleChange}
+            label="Confirm Password"
+            type={this.state.passwordIsVisible ? 'text' : 'password'} 
+            isPassword
             required
           />
           <label>

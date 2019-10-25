@@ -1,10 +1,10 @@
 import React from 'react'
 import './FormInput.styles.scss'
 
-const FormInput = ({handleChange, label, ...inputProps}) => {
+const FormInput = ({handleChange, label, isPassword, ...inputProps}) => {
   return (
     <div className="group">
-      <input className="form-input" onChange={handleChange} {...inputProps}></input>
+      <input className={`${isPassword ? 'password-field' : ''} form-input`} onChange={handleChange} {...inputProps}></input>
       {
         label 
         ? <label className={`${inputProps.value.length ? 'shrink' : ''} form-input-label`}>
@@ -12,6 +12,7 @@ const FormInput = ({handleChange, label, ...inputProps}) => {
           </label>
         :null
       }
+      {/* {isPassword ? <span>true</span> : <span>false</span>} */}
     </div>
   )
 }

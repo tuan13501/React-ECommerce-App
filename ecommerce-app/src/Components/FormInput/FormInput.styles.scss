@@ -13,6 +13,8 @@ $main-color: black;
   display: flex;
   flex-direction: column;
 
+  
+
   .form-input {
     background: none;
     background-color: white;
@@ -26,6 +28,11 @@ $main-color: black;
     border-bottom: 1px solid $sub-color;
     margin: 10px 0;
     overflow: hidden;
+
+    &.password-field{
+      display: flex;
+    }
+
 
     &:focus {
       outline: none;
