@@ -3,9 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './Navbar.styles.scss'
 import { auth } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
 
 
-const Navbar = ({currentUser, history}) =>{
+
+const Navbar = ({currentUser}) =>{
   // console.log(history)
   return (
     <div className="header">
@@ -23,7 +25,7 @@ const Navbar = ({currentUser, history}) =>{
           currentUser
           ? <div className="option" onClick={() => {
             auth.signOut();
-            history.push('/')
+            // history.push('/')
             }}>
               <h3>SIGN OUT</h3>
             </div>
@@ -36,4 +38,10 @@ const Navbar = ({currentUser, history}) =>{
   )
 }
 
-export default Navbar
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Navbar)
