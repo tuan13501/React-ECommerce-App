@@ -2,7 +2,7 @@ import HomePage from './Components/Homepage/HomePage.component'
 import Navbar from './Components/Navbar/Navbar.component'
 import ShopPage from './Components/Shop/Shop.component'
 import Onboarding from './Components/Onboarding/Onboarding.component'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import React from 'react';
 import './App.css';
 import { auth,createUserProfileDocument } from './firebase/firebase.utils'
@@ -52,14 +52,26 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar /> 
+        <Navbar someProp="checking props"/> 
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={Onboarding} />
+          <Route exact path='/signin' render={(props) => {
+            if(this.props.currentUser){
+              return <Redirect to="/"/>
+            } else {
+              return <Onboarding {...props}/> 
+            }
+          }} />
         </Switch>
       </div>
     );
+  }
+}
+
+const mapStateToProps = ({ user }) => {
+  return {
+    currentUser: user.currentUser
   }
 }
 
@@ -69,4 +81,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
