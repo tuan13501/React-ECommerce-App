@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.styles.scss";
 
 const Navbar = ({ currentUser, ...props }) => {
-  console.log("toggle cart props", props);
+  // console.log("toggle cart props", props);
   // console.log(history)
   return (
     <div className="header">
