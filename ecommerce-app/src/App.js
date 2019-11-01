@@ -8,6 +8,7 @@ import './App.css';
 import { auth,createUserProfileDocument } from './firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
+import { selectCurrentUser } from './redux/user/user.selectors'
 
 class App extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class App extends React.Component {
         <Navbar someProp="checking props"/> 
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/shop' component={ShopPage} />
           <Route exact path='/signin' render={(props) => {
             if(this.props.currentUser){
               return <Redirect to="/"/>
@@ -69,9 +70,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = state => {
   return {
-    currentUser: user.currentUser
+    currentUser: selectCurrentUser(state)
   }
 }
 

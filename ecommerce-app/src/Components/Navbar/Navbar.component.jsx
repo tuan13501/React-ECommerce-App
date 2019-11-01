@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 import { Link } from "react-router-dom";
 import "./Navbar.styles.scss";
+import { createStructuredSelector } from 'reselect'
+import { selectCartHidden } from '../../redux/cart/cart.selectors'
+import { selectCurrentUser } from '../../redux/user/user.selectors'
 
 const Navbar = ({ currentUser, ...props }) => {
   // console.log("toggle cart props", props);
@@ -44,11 +47,11 @@ const Navbar = ({ currentUser, ...props }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.user.currentUser,
-    hidden: state.cart.hidden
-  };
-};
+const mapStateToProps = createStructuredSelector({
+
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
+
+});
 
 export default connect(mapStateToProps)(Navbar);
