@@ -1,12 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import CartItem from '../CartItem/CartItem.component'
 import { selectCartItems } from '../../redux/cart/cart.selectors'
+import { toggleCartHidden } from '../../redux/cart/cart.actions'
+import { withRouter } from 'react-router-dom'
 
 import CustomButton from '../CustomButton/CustomButton.component'
 import './CartDropdown.styles.scss'
 
-const CartDropDown = ({ cartItems }) => {
+const CartDropDown = ({ cartItems, ...props }) => {
 
   const EmptyPage = () => {
     return (
@@ -19,14 +22,16 @@ const CartDropDown = ({ cartItems }) => {
   return (
     <div className="cart-dropdown">
       <div className={`${cartItems.length === 0 ? 'empty-cart' : ''} cart-items`}>
-        {cartItems.length === 0
+        {!cartItems.length 
         ? <EmptyPage />
         : cartItems.map(item => {
          return <CartItem key={item.id} item={item}/>
          }
         )}
       </div>
-      <CustomButton>GO TO CHECKOUT</CustomButton>
+      <Link onClick={props.toggleCartHidden} className="checkout-link" to="/checkout">
+        <CustomButton >GO TO CHECKOUT</CustomButton>
+      </Link>
     </div>
   )
 }
@@ -36,4 +41,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(CartDropDown)
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleCartHidden: () => dispatch(toggleCartHidden())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartDropDown))

@@ -1,7 +1,8 @@
 import HomePage from './Components/Homepage/HomePage.component'
 import Navbar from './Components/Navbar/Navbar.component'
-import ShopPage from './Components/Shop/Shop.component'
+import Shop from './Components/Shop/Shop.component'
 import Onboarding from './Components/Onboarding/Onboarding.component'
+import CheckoutPage from './Components/Checkout/Checkout.component'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import React from 'react';
 import './App.css';
@@ -51,19 +52,21 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.props
     return (
       <div>
-        <Navbar someProp="checking props"/> 
+        <Navbar /> 
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={ShopPage} />
+          <Route exact path='/shop' component={Shop} />
           <Route exact path='/signin' render={(props) => {
-            if(this.props.currentUser){
+            if(currentUser){
               return <Redirect to="/"/>
             } else {
               return <Onboarding {...props}/> 
             }
           }} />
+          <Route exact path='/checkout' component={CheckoutPage}/>
         </Switch>
       </div>
     );
