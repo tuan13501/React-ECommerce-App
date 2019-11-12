@@ -1,11 +1,10 @@
 import React from 'react'
 import './CartItem.styles.scss'
-import { connect } from 'react-redux'
 
 const CartItem = ({ item }) => {
   return (
     <div className="cart-item">
-      <img src={item.imageUrl}/>
+      <img alt="item" src={item.imageUrl}/>
       <div className="item-details">
         <span className="name">{item.name}</span>
         <span className="price">{item.quantity} x ${item.price}</span>
