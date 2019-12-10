@@ -1,13 +1,14 @@
 import React from 'react'
-import './Directory.styles.scss'
 import MenuItem from '../MenuItem/MenuItem.component'
-// import {sections} from '../../directory.data'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-
 import { selectDirectorySections } from '../../redux/directory/directory.selector'
+import store from '../../redux/store'
+
+import './Directory.styles.scss'
 
 const Directory = ({sections}) => {
+  console.log(store)
 
   return (
     <div className="menu-container">
