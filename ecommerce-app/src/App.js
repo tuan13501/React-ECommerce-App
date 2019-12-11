@@ -58,15 +58,15 @@ class App extends React.Component {
         <Navbar /> 
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={Shop} />
-          <Route exact path='/signin' render={(props) => {
+          <Route path='/shop' component={Shop} />
+          <Route path='/signin' render={(props) => {
             if(currentUser){
               return <Redirect to="/"/>
             } else {
               return <Onboarding {...props}/> 
             }
           }} />
-          <Route exact path='/checkout' component={CheckoutPage}/>
+          <Route path='/checkout' component={CheckoutPage}/>
         </Switch>
       </div>
     );
