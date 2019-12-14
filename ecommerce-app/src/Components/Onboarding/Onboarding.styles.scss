@@ -1,0 +1,11 @@
+.onboarding{
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  width: 70%;
+  padding-top: 6%;
+  margin: 0 auto;
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #252627, #18191a);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #38393a, #232526)
+}
